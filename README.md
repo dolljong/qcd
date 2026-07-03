@@ -58,7 +58,7 @@ qcd <seg1>/<seg2>[/...]
 qcd --list-roots            검색 루트 목록
 qcd --add-root <dir>        검색 루트 추가
 qcd --remove-root <dir>     검색 루트 제거
-qcd --help                  도움말
+qcd -h, -help, --help       도움말
 ```
 
 ## 설정 — `roots.txt`

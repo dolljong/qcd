@@ -29,8 +29,11 @@ internal static class Program
     {
         try
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.InputEncoding = Encoding.UTF8;
+            if (Environment.GetEnvironmentVariable("QCD_PRESERVE_CONSOLE_ENCODING") != "1")
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = Encoding.UTF8;
+            }
         }
         catch { }
 
@@ -40,7 +43,7 @@ internal static class Program
         for (int i = 0; i < args.Length; i++)
         {
             var a = args[i];
-            if (a is "-h" or "--help") { PrintHelp(); return 0; }
+            if (a is "-h" or "-help" or "--help") { PrintHelp(); return 0; }
             else if (a == "--out" && i + 1 < args.Length) { _outFile = args[++i]; }
             else if (a == "--list-roots") { ListRoots(); return 0; }
             else if (a == "--add-root" && i + 1 < args.Length) { AddRoot(args[++i]); return 0; }
@@ -296,7 +299,7 @@ internal static class Program
 
     private static void PrintHelp()
     {
-        Console.WriteLine("qcd — 폴더명 패턴으로 빠르게 이동");
+        Console.WriteLine("qcd - 폴더명 패턴으로 빠르게 이동");
         Console.WriteLine();
         Console.WriteLine("사용법:");
         Console.WriteLine("  qcd <query>                   폴더명에 query가 포함된 폴더로 이동");
@@ -304,7 +307,7 @@ internal static class Program
         Console.WriteLine("  qcd --list-roots              검색 루트 목록 표시");
         Console.WriteLine("  qcd --add-root <dir>          검색 루트 추가");
         Console.WriteLine("  qcd --remove-root <dir>       검색 루트 제거");
-        Console.WriteLine("  qcd --help                    도움말");
+        Console.WriteLine("  qcd -h, -help, --help         도움말");
         Console.WriteLine();
         Console.WriteLine("예:");
         Console.WriteLine("  qcd proj                      'proj' 포함 폴더");
