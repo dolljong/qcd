@@ -1,0 +1,7 @@
+# Build artifacts
+bin/
+obj/
+*.pdb
+
+# Local config (auto-generated on first run)
+roots.txt
